@@ -1,10 +1,11 @@
 ## gestión de videoclub
 def añadir_pelicula(lista_peliculas):
     cantidad=int(input("dame la cantidad de copias que quieres introducir: "))
-    global contador_peliculas
-    global id_pelicula
+    global contador_peliculas #con global estamos indicando que contador_peliculas
+    global id_pelicula        #es la variable declarada en el programa principal
     
-    if (contador_peliculas + cantidad <=MAX_PELICULAS):
+    if (contador_peliculas + cantidad <=MAX_PELICULAS):#si queda hueco para añadir las
+                                 #nuevas peliculas la añado
         pelicula=[]
         contador_peliculas+=cantidad
         id_pelicula+=1
@@ -14,9 +15,9 @@ def añadir_pelicula(lista_peliculas):
         pelicula.append(input("dame el género de la peli: "))
         pelicula.append(input("dame el año de la peli: "))            
         pelicula.append(input("dame la duración en minutos: "))
-        pelicula.append(True)    
-        pelicula.append(cantidad)
-        pelicula.append(0)
+        pelicula.append(True)    #por defecto, inicialmente está disponible
+        pelicula.append(cantidad) 
+        pelicula.append(0) #por defecto, inicialmente no hay ninguna pelicula reservada
         lista_peliculas.append(pelicula)
     else:
         print ("No hay sitio para almacenar %d películas, ya que solo hay hueco\
@@ -30,9 +31,10 @@ def reservar_pelicula():
     if (id_peli<=id_pelicula and id_peli>0):
         if lista_peliculas[id_peli-1][6]==True:
             print ("la película ha sido reservada")
-            lista_peliculas[id_peli-1][7]-=1
-            if lista_peliculas[id_peli-1][7]==0:
-                lista_peliculas[id_peli-1][6]=False
+            lista_peliculas[id_peli-1][7]-=1 #tal y como solicita el enunciado la primera peli
+            if lista_peliculas[id_peli-1][7]==0: # tiene id 1, pero su posición es la 0, por tanto,
+                lista_peliculas[id_peli-1][6]=False # si quiere acceder a la pelicula con id 5,
+                                                    # su posición es 0
         else:
             print ("lo sentimos, la película que quieres reservar no está \
 disponible")
@@ -43,12 +45,15 @@ def listar_peliculas():
     print ("===============================")
     print ("listado de películas")
     print ("===============================")    
-    for i in lista_peliculas:
-        mostrar_pelicula(i)
-
+    for i in lista_peliculas:#lista_peliculas es la lista que forma parte del programa principal
+        mostrar_pelicula(i) #¿y por qué no usamos global? La respuesta es que solo la estamos consultando
+                            #python lo interpreta de esta manera: ¿lista_peliculas existe en este
+                            # procedimiento y además no le estoy asignando algo p.ej: lista_peliculas=0
+                            # si hicieramos eso, crearía una nueva variable local dentro de la función
+                            # leed atentamente el artículo que publiqué en el classroom
 def mostrar_pelicula(peli):
         if peli[6]==True:
-            disponible="Disponible"
+            disponible="Disponible" # almaceno en esta variable el literal "disponible"
         else:
             disponible="No disponible"
         print ("Id: %d Título: %s Director:%s Género: %s \
@@ -102,7 +107,7 @@ while salir==False:
     print ("=========================")           
     opcion=int(input("¿Qué opción deseas? "))
     if opcion==1:
-        añadir_pelicula(lista_peliculas)
+        lista_peliculas=añadir_pelicula(lista_peliculas)
     elif opcion==2:
         reservar_pelicula()
     elif opcion==3:
