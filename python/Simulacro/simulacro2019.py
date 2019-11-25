@@ -27,7 +27,6 @@ para %d películas más." % (cantidad,(MAX_PELICULAS-contador_peliculas)))
 def reservar_pelicula():
     listar_peliculas()
     id_peli=int(input("dame el id de la película que quieres reservar"))
-    salir=False
     if (id_peli<=id_pelicula and id_peli>0):
         if lista_peliculas[id_peli-1][6]==True:
             print ("la película ha sido reservada")
