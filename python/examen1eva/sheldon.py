@@ -16,7 +16,7 @@ que es el resultado de multiplicar, agarraos fuerte, 7 por 3."""
 def esPrimo(num):
     i=2
     es_primo=True
-    while (i<num-1 and es_primo==True):
+    while (i<num and es_primo==True):
         if num%i==0:
             es_primo=False
         i+=1
